@@ -20,18 +20,18 @@ class Candidatura extends Model
     ];
 
     public function candidato(){
-        return $this->belongsTo(Candidato::class, 'id');
+        return $this->belongsTo(Candidato::class);
     }
 
     public function partido(){
-        return $this->belongsTo(Partido::class, 'id');
+        return $this->belongsTo(Partido::class);
     }
 
     public function cargo(){
-        return $this->belongsTo(Cargo::class, 'id');
+        return $this->belongsTo(Cargo::class);
     }
 
     public function status(){
-        return $this->belongsTo(Status::class, 'id');
+        return $this->belongsTo(Status::class);
     }
 }

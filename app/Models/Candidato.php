@@ -12,11 +12,11 @@ class Candidato extends Model
     
     protected $table = 'public.candidatos';
     protected $fillable = [
-        'Nome','E-mail',
+        'Nome','Email',
         'Telefone','Titulo_eleitor'
     ];
 
     public function politico(){
-        return $this->hasOne(Candidatura::class, 'candidato_id');
+        return $this->hasOne(Candidatura::class);
     }
 }
