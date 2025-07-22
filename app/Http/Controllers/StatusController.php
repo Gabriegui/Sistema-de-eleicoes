@@ -12,7 +12,7 @@ use Inertia\Response;
 class StatusController extends Controller
 {
     public function create(): Response{
-        return Inertia::render('register-status');
+        return Inertia::render('register/register-status');
     }
 
     public function store(Request $request): RedirectResponse{
@@ -26,20 +26,20 @@ class StatusController extends Controller
             'updated_at' => now(),
         ]);
 
-        return to_route('lista-status')->with('success', 'Status registrado com sucesso.');
+        return to_route('lista/lista-status')->with('success', 'Status registrado com sucesso.');
     }
 
     public function show(){
         $status = Status::all();
 
-        return Inertia::render('lista-status', [
+        return Inertia::render('lista/lista-status', [
             'status' => $status,
         ]);
     }
 
     public function edit($id){
         $status = Status::findOrFail($id);
-        return Inertia::render('edit-status', [
+        return Inertia::render('edit/edit-status', [
             'status' => $status,
         ]);
     }
@@ -54,12 +54,12 @@ class StatusController extends Controller
 
         $status->update($validated);
         
-        return to_route('lista-status')->with('success', 'Status editado com sucesso.');
+        return to_route('lista/lista-status')->with('success', 'Status editado com sucesso.');
     }
 
     public function destroy($id){
         $status = Status::findOrFail($id);
         $status->delete();
-        return to_route('lista-status')->with('success', 'Status deletado com sucesso.');
+        return to_route('lista/lista-status')->with('success', 'Status deletado com sucesso.');
     }
 }

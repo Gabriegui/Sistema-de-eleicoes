@@ -12,7 +12,7 @@ use Inertia\Response;
 class PartidosController extends Controller
 {
     public function create(): Response{
-        return Inertia::render('register-partido');
+        return Inertia::render('register/register-partido');
     }
 
     public function store(Request $request): RedirectResponse{
@@ -28,20 +28,20 @@ class PartidosController extends Controller
             'updated_at' => now(),
         ]);
 
-        return to_route('lista-partidos')->with('success', 'Partido registrado com sucesso.');
+        return to_route('lista/lista-partidos')->with('success', 'Partido registrado com sucesso.');
     }
 
     public function show(){
         $partidos = Partido::all();
 
-        return Inertia::render('lista-partidos', [
+        return Inertia::render('lista/lista-partidos', [
             'partidos' => $partidos,
         ]);
     }
 
     public function edit($id){
         $partido = Partido::findOrFail($id);
-        return Inertia::render('edit-partido', [
+        return Inertia::render('edit/edit-partido', [
             'partido' => $partido,
         ]);
     }
@@ -57,12 +57,12 @@ class PartidosController extends Controller
 
         $partido->update($validated);
         
-        return to_route('lista-partidos')->with('success', 'Partido editado com sucesso.');
+        return to_route('lista/lista-partidos')->with('success', 'Partido editado com sucesso.');
     }
 
     public function destroy($id){
         $partido = Partido::findOrFail($id);
         $partido->delete();
-        return to_route('lista-partidos')->with('success', 'Partido deletado com sucesso.');
+        return to_route('lista/lista-partidos')->with('success', 'Partido deletado com sucesso.');
     }
 }

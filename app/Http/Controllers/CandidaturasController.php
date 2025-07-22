@@ -16,7 +16,7 @@ use Inertia\Response;
 class CandidaturasController extends Controller
 {
     public function create(): Response{
-        return Inertia::render('register-candidatura');
+        return Inertia::render('register/register-candidatura');
     }
 
     public function store(Request $request): RedirectResponse{
@@ -68,7 +68,7 @@ class CandidaturasController extends Controller
             'updated_at' => now(),
         ]);
 
-        return to_route('lista-candidaturas')->with('success', 'Candidatura registrada com sucesso.');
+        return to_route('lista/lista-candidaturas')->with('success', 'Candidatura registrada com sucesso.');
     }
 
     public function show(){
@@ -76,14 +76,14 @@ class CandidaturasController extends Controller
             ->with(['candidato', 'partido', 'cargo', 'status'])
             ->get();
 
-        return Inertia::render('lista-candidaturas', [
+        return Inertia::render('lista/lista-candidaturas', [
             'candidaturas' => $candidaturas,
         ]);
     }
     
     public function edit($id){
         $candidatura = Candidatura::findOrFail($id);
-        return Inertia::render('edit-candidatura', [
+        return Inertia::render('edit/edit-candidatura', [
             'candidatura' => $candidatura,
         ]);
     }
@@ -102,12 +102,12 @@ class CandidaturasController extends Controller
         
         $candidatura->update($validated);
         
-        return to_route('lista-candidaturas')->with('success', 'Candidatura editada com sucesso.');
+        return to_route('lista/lista-candidaturas')->with('success', 'Candidatura editada com sucesso.');
     }
 
     public function destroy($id){
         $candidatura = Candidatura::findOrFail($id);
         $candidatura->delete();
-        return to_route('lista-candidaturas')->with('success', 'Candidatura deletada com sucesso.');
+        return to_route('lista/lista-candidaturas')->with('success', 'Candidatura deletada com sucesso.');
     }
 }

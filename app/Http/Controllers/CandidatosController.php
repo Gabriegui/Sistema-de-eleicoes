@@ -12,7 +12,7 @@ use Inertia\Response;
 class CandidatosController extends Controller
 {
     public function create(): Response{
-        return Inertia::render('register-candidato');
+        return Inertia::render('register/register-candidato');
     }
 
     public function store(Request $request): RedirectResponse{
@@ -32,20 +32,20 @@ class CandidatosController extends Controller
             'updated_at' => now(),
         ]);
 
-        return to_route('lista-candidatos')->with('success', 'Candidato registrado com sucesso.');
+        return to_route('lista/lista-candidatos')->with('success', 'Candidato registrado com sucesso.');
     }
 
     public function show(){
         $candidatos = Candidato::all();
 
-        return Inertia::render('lista-candidatos', [
+        return Inertia::render('lista/lista-candidatos', [
             'candidatos' => $candidatos,
         ]);
     }
 
     public function edit($id){
         $candidato = Candidato::findOrFail($id);
-        return Inertia::render('edit-candidato', [
+        return Inertia::render('edit/edit-candidato', [
             'candidato' => $candidato,
         ]);
     }
@@ -63,12 +63,12 @@ class CandidatosController extends Controller
 
         $candidato->update($validated);
         
-        return to_route('lista-candidatos')->with('success', 'Candidato editado com sucesso.');
+        return to_route('lista/lista-candidatos')->with('success', 'Candidato editado com sucesso.');
     }
 
     public function destroy($id){
         $candidato = Candidato::findOrFail($id);
         $candidato->delete();
-        return to_route('lista-candidatos')->with('success', 'Candidato deletado com sucesso.');
+        return to_route('lista/lista-candidatos')->with('success', 'Candidato deletado com sucesso.');
     }
 }

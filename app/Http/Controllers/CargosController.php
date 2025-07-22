@@ -12,7 +12,7 @@ use Inertia\Response;
 class CargosController extends Controller
 {
     public function create(): Response{
-        return Inertia::render('register-cargo');
+        return Inertia::render('register/register-cargo');
     }
 
     public function store(Request $request): RedirectResponse{
@@ -26,20 +26,20 @@ class CargosController extends Controller
             'updated_at' => now(),
         ]);
 
-        return to_route('lista-cargos')->with('success', 'Cargo registrado com sucesso.');
+        return to_route('lista/lista-cargos')->with('success', 'Cargo registrado com sucesso.');
     }
 
     public function show(){
         $cargos = Cargo::all();
 
-        return Inertia::render('lista-cargos', [
+        return Inertia::render('lista/lista-cargos', [
             'cargos' => $cargos,
         ]);
     }
 
     public function edit($id){
         $cargo = Cargo::findOrFail($id);
-        return Inertia::render('edit-cargo', [
+        return Inertia::render('edit/edit-cargo', [
             'cargo' => $cargo,
         ]);
     }
@@ -54,12 +54,12 @@ class CargosController extends Controller
 
         $cargo->update($validated);
         
-        return to_route('lista-cargos')->with('success', 'Cargo editado com sucesso.');
+        return to_route('lista/lista-cargos')->with('success', 'Cargo editado com sucesso.');
     }
 
     public function destroy($id){
         $cargo = Cargo::findOrFail($id);
         $cargo->delete();
-        return to_route('lista-cargos')->with('success', 'Cargo deletado com sucesso.');
+        return to_route('lista/lista-cargos')->with('success', 'Cargo deletado com sucesso.');
     }
 }

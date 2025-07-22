@@ -12,7 +12,7 @@ use Inertia\Response;
 class EleicoesController extends Controller
 {
     public function create(): Response{
-        return Inertia::render('register-eleicao');
+        return Inertia::render('register/register-eleicao');
     }
 
     public function store(Request $request): RedirectResponse{
@@ -28,20 +28,20 @@ class EleicoesController extends Controller
             'updated_at' => now(),
         ]);
 
-        return to_route('lista-eleicoes')->with('success', 'Eleição registrada com sucesso.');
+        return to_route('lista/lista-eleicoes')->with('success', 'Eleição registrada com sucesso.');
     }
 
     public function show(){
         $eleicoes = Eleicao::all();
 
-        return Inertia::render('lista-eleicoes', [
+        return Inertia::render('lista/lista-eleicoes', [
             'eleicoes' => $eleicoes,
         ]);
     }
 
     public function edit($id){
         $eleicao = Eleicao::findOrFail($id);
-        return Inertia::render('edit-eleicao', [
+        return Inertia::render('edit/edit-eleicao', [
             'eleicao' => $eleicao,
         ]);
     }
@@ -57,12 +57,12 @@ class EleicoesController extends Controller
 
         $eleicao->update($validated);
         
-        return to_route('lista-eleicoes')->with('success', 'Eleição editada com sucesso.');
+        return to_route('lista/lista-eleicoes')->with('success', 'Eleição editada com sucesso.');
     }
 
     public function destroy($id){
         $eleicao = Eleicao::findOrFail($id);
         $eleicao->delete();
-        return to_route('lista-eleicoes')->with('success', 'Eleição deletada com sucesso.');
+        return to_route('lista/lista-eleicoes')->with('success', 'Eleição deletada com sucesso.');
     }
 }
